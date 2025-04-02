@@ -1,0 +1,26 @@
+# Core Python version (recommended, not strictly enforced by pip)
+# This line is mostly for documentation; conda or virtualenv would handle the actual Python version.
+python>=3.9
+
+# PyTorch (GPU-enabled). For CPU-only installs, see PyTorch's official install instructions.
+torch==2.0.1
+torchvision==0.15.2
+torchaudio==2.0.2
+
+# PyTorch Geometric and associated dependencies for graph-based deep learning
+# Make sure to install with the correct CUDA or CPU binaries.
+torch-scatter==2.1.0
+torch-sparse==0.6.16
+torch-geometric==2.3.1
+
+# General utility libraries
+numpy==1.24.2
+pandas==2.0.0
+scikit-learn==1.2.2
+tqdm==4.65.0
+
+# Visualization
+matplotlib==3.7.1
+
+# YAML for config expansions, if needed
+pyyaml==6.0
