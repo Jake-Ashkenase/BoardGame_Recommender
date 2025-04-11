@@ -52,6 +52,7 @@ class BoardGameGraphBuilder:
         self.edge_attr = []
 
     def load_game_data(self):
+        print("Trying to load game data from:", Config.OVERALL_GAMES_FILE)
         # read the games csv
         if not os.path.exists(Config.OVERALL_GAMES_FILE):
             raise FileNotFoundError("Game data file not found.")
@@ -237,7 +238,6 @@ class BoardGameGraphBuilder:
         # value)
         from torch_geometric.utils import coalesce
         edge_index, edge_attr = coalesce(edge_index, edge_attr, num_nodes=total_nodes, reduce='max')
-
         data = Data(x=X, edge_index=edge_index, edge_attr=edge_attr)
         data.num_users = self.num_users
         data.num_games = self.num_games
