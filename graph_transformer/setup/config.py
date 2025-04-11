@@ -7,40 +7,52 @@ class Config:
     Contains hyperparameters, file paths, and other options.
     """
 
-    PROJECT_DIR = os.path.abspath(
-        os.path.join(os.path.dirname(__file__), "../..", "..")
-    )
-
-    # The directory containing this config.py: "graph_transformer"
-    GT_DIR = os.path.abspath(os.path.dirname(__file__))
-
-    # bgg_data folder (alongside BoardGame_Recommender in "Final")
+    PROJECT_DIR = "/content/drive/MyDrive/Colab Notebooks/Final"
+    GT_DIR = os.path.join(PROJECT_DIR, "BoardGame_Recommender")
     DATA_DIR = os.path.join(PROJECT_DIR, "bgg_data")
+    CHECKPOINT_DIR = os.path.join(GT_DIR, "checkpoints")
 
-    # Local checkpoints folder inside graph_transformer
-    CHECKPOINT_DIR = os.path.join(GT_DIR, "../checkpoints")
+    USER_RATINGS_FILE = os.path.join(DATA_DIR, "ratings_starter.csv")
+    OVERALL_GAMES_FILE = os.path.join(DATA_DIR, "overall_games_starter.csv")
 
-    # Data Files
-    BGG_DATA_FILE = os.path.join(DATA_DIR, "bgg_data_documentation.txt")
-    USER_RATINGS_FILE = os.path.join(DATA_DIR, "ratings_filtered.csv")
-    OVERALL_GAMES_FILE = os.path.join(DATA_DIR, "overall_games.csv")
+    # eval and checkpoint patterns
+    EVAL_EVERY = 1
+    SAVE_EVERY = 1
 
     # Hyperparameters
-    LEARNING_RATE = 0.001
-    BATCH_SIZE = 64
-    NUM_EPOCHS = 50
-    DROPOUT = 0.5
-    NUM_TRANSFORMER_LAYERS = 4
-    EMBEDDING_DIM = 128
+    MLP_LEARNING_RATE = 0.001
+    TRANSFORMER_LEARNING_RATE = 0.008
+    BATCH_SIZE = 256
+    NUM_EPOCHS = 20
+
+    # model capacity
+    NUM_TRANSFORMER_LAYERS = 3
+    EMBEDDING_DIM_TRANSFORMER = 256
+    EMBEDDING_DIM_MLP = 128  # reduced from 256 to lower capacity
+    INPUT_DIM_MLP = 256
+    NUM_MLP_LAYERS = 3  # reduced from 4
     NUM_HEADS = 8
+
+    # hyperparameters fo regularization and scheduling
+    EDGE_DROPOUT = 0.2  # Fraction of edges to drop in the GNN
+    SCHEDULER_FACTOR = 0.5  # Factor for reducing the learning rate on plateau
+    SCHEDULER_PATIENCE = 2  # Number of epochs with no improvement before reducing LR
+    DROPOUT = 0.4  # was .5 for no overfitting
+    WEIGHT_DECAY = .00005  # increased from .00001 for overfitting
 
     # Training Settings
     LOG_INTERVAL = 10  # iterations
-    SEED = 42
+    SEED = 20
+    PATIENCE = 5
 
     # Device Configuration
-    # Example logic: if CUDA_VISIBLE_DEVICES is set, use 'cuda', else try 'mps' as fallback
-    DEVICE = "cuda" if os.environ.get("CUDA_VISIBLE_DEVICES") else "cpu"
+    DEVICE = 'cuda'  # if os.getenv('CUDA_VISIBLE_DEVICES') else 'cpu'
+
+    BACKGROUND_COLOR = "#faf9f6"
+    PRIMARY_COLOR = "#f59a1b"
+    SECONDARY_COLOR = "#f52e3c"
+    TERNARY_COLOR = "#f5cdbf"
+    QUATERNARY_COLOR = "#100e0e"
 
     @classmethod
     def ensure_directories(cls):
@@ -50,4 +62,3 @@ class Config:
 
 # Run this to ensure directories exist when config is imported.
 Config.ensure_directories()
-
