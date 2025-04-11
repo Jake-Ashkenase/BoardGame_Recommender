@@ -1,3 +1,12 @@
+# cool toned color palette
+COLOR_SCHEME = {
+    'background': "#1F2C38",  # dark bluish gray
+    'primary': "#3E92CC",     # cool blue
+    'secondary': "#66A5AD",   # soft teal
+    'accent': "#A2B9BC",      # muted light blue/gray
+    'text': "#FFFFFF"         # white text for contrast
+}
+
 # data processing parameters
 DATA_PARAMS = {
     'continuous_columns_end_index': 514  # first 514 columns are continuous; remaining columns are binary flags
